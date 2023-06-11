@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 from googleapiclient.discovery import build
+from typing import List
 
 SEARCH_RESULTS_FILE = "search_results.json"
 YT_API_KEY = os.getenv('YT_API_KEY')
@@ -21,7 +22,7 @@ def get_youtube_service() -> build:
     return youtube
 
 
-def get_search_results(query: str) -> list[dict]:
+def get_search_results(query: str) -> List[dict]:
     """Выполняет поиск видео в YouTube по заданному запросу и возвращает список видео."""
 
     youtube = get_youtube_service()
@@ -78,7 +79,7 @@ def print_video_info(video_info: dict) -> None:
         f"| {video_info['title']:<40} | {video_info['view_count']:<10} | {video_info['like_count']:<6} | {video_info['ratio']:<7} | {video_info['url']:<35} |")
 
 
-def save_results_to_json(query: str, results: list[dict]) -> None:
+def save_results_to_json(query: str, results: List[dict]) -> None:
     """Сохраняет результаты поиска в файл JSON."""
 
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
